@@ -24,3 +24,8 @@ Route::get('login','SessionsController@create')->name('login');
 Route::post('login','SessionsController@store')->name('login');
 Route::delete('logout','SessionsController@destory')->name('logout');
 Route::get('signup/confirm/{token}','UsersController@confirmEmail')->name('confirm_email');
+
+Route::get('passwords/reset',  'PasswordController@showLinkRequestForm')->name('passwords.request');
+Route::post('passwords/email',  'PasswordController@sendResetLinkEmail')->name('passwords.email');
+Route::get('passwords/reset/{token}',  'PasswordController@showResetForm')->name('passwords.reset');
+Route::post('passwords/reset',  'PasswordController@reset')->name('passwords.update');

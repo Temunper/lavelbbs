@@ -49,7 +49,7 @@ class UsersController extends Controller
         $this->validate($request, [
             'name' => 'required|unique:users|max:50',
             'email' => 'required|unique:users|max:50',
-            'password' => 'required|confirmed|min:6'
+            'passwords' => 'required|confirmed|min:6'
         ]);
 
         $user = User::create([
@@ -73,12 +73,12 @@ class UsersController extends Controller
         $this->authorize('update', $user);
         $this->validate($request, [
             'name' => 'required|max:50',
-            'password' => 'required|confirmed|min:6'
+            'passwords' => 'required|confirmed|min:6'
         ]);
         $data = [];
         $data['name'] = $request->name;
         if ($request->password) {
-            $data['password'] = bcrypt($request->password);
+            $data['passwords'] = bcrypt($request->password);
         }
 
         $user->update($data);

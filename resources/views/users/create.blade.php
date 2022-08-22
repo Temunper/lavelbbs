@@ -21,7 +21,7 @@
           </div>
           <div class="mb-3">
             <label for="password">密码：</label>
-            <input type="password" name="password" class="form-control" value="{{old('password')}}">
+            <input type="password" name="password" class="form-control" value="{{old('passwords')}}">
           </div>
           <div class="mb-3">
             <label for="password_confirmation">确认密码：</label>
