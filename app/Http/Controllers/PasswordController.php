@@ -89,4 +89,10 @@ class PasswordController extends Controller
         session()->flash('danger', '未找到重置记录');
         return redirect()->back();
     }
+
+    public function showResetForm(Request $request)
+    {
+        $token = $request->route()->parameter('token');
+        return view('auth.passwords.reset', compact('token'));
+    }
 }
