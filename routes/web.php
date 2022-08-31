@@ -13,31 +13,33 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'StaticPagesController@home')->name('home');
-Route::get('/help', 'StaticPagesController@help')->name('help');
-Route::get('/about', 'StaticPagesController@about')->name('about');
+Route::prefix('demo1')->group(function () {
+    Route::get('/', 'StaticPagesController@home')->name('home');
+    Route::get('/help', 'StaticPagesController@help')->name('help');
+    Route::get('/about', 'StaticPagesController@about')->name('about');
 
-Route::get('signup','UsersController@create')->name('signup');
-Route::resource('users', 'UsersController');
-Route::resource('statuses', 'StatusesController');
+    Route::get('signup', 'UsersController@create')->name('signup');
+    Route::resource('users', 'UsersController');
+    Route::resource('statuses', 'StatusesController');
 
-Route::get('login','SessionsController@create')->name('login');
-Route::post('login','SessionsController@store')->name('login');
-Route::delete('logout','SessionsController@destory')->name('logout');
+    Route::get('login', 'SessionsController@create')->name('login');
+    Route::post('login', 'SessionsController@store')->name('login');
+    Route::delete('logout', 'SessionsController@destory')->name('logout');
 
-Route::get('signup/confirm/{token}', 'UsersController@confirmEmail')->name('confirm_email');
-
-
-Route::get('password/reset',  'PasswordController@showLinkRequestForm')->name('password.request');
-Route::post('password/email',  'PasswordController@sendResetLinkEmail')->name('password.email');
-
-Route::get('password/reset/{token}',  'PasswordController@showResetForm')->name('password.reset');
-Route::post('password/reset',  'PasswordController@reset')->name('password.update');
+    Route::get('signup/confirm/{token}', 'UsersController@confirmEmail')->name('confirm_email');
 
 
-Route::get('/users/{user}/followings', 'UsersController@followings')->name('users.followings');
-Route::get('/users/{user}/followers', 'UsersController@followers')->name('users.followers');
+    Route::get('password/reset', 'PasswordController@showLinkRequestForm')->name('password.request');
+    Route::post('password/email', 'PasswordController@sendResetLinkEmail')->name('password.email');
+
+    Route::get('password/reset/{token}', 'PasswordController@showResetForm')->name('password.reset');
+    Route::post('password/reset', 'PasswordController@reset')->name('password.update');
 
 
-Route::post('/users/followers/{user}', 'FollowersController@store')->name('followers.store');
-Route::delete('/users/followers/{user}', 'FollowersController@destroy')->name('followers.destroy');
+    Route::get('/users/{user}/followings', 'UsersController@followings')->name('users.followings');
+    Route::get('/users/{user}/followers', 'UsersController@followers')->name('users.followers');
+
+
+    Route::post('/users/followers/{user}', 'FollowersController@store')->name('followers.store');
+    Route::delete('/users/followers/{user}', 'FollowersController@destroy')->name('followers.destroy');
+});
